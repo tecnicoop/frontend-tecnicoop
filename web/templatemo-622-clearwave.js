@@ -270,9 +270,9 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
       document.getElementById('price-starter').textContent = prices.starter[idx];
       document.getElementById('price-pro').textContent = prices.pro[idx];
       document.getElementById('price-ent').textContent = prices.ent[idx];
-      document.getElementById('annual-note-starter').textContent = isAnnual ? `$${annualTotals.starter} billed annually` : '\u00a0';
-      document.getElementById('annual-note-pro').textContent     = isAnnual ? `$${annualTotals.pro} billed annually` : '\u00a0';
-      document.getElementById('annual-note-ent').textContent     = isAnnual ? `$${annualTotals.ent} billed annually` : '\u00a0';
+      document.getElementById('annual-note-starter').textContent = isAnnual ? `$${annualTotals.starter} facturado anualmente` : '\u00a0';
+      document.getElementById('annual-note-pro').textContent     = isAnnual ? `$${annualTotals.pro} facturado anualmente` : '\u00a0';
+      document.getElementById('annual-note-ent').textContent     = isAnnual ? `$${annualTotals.ent} facturado anualmente` : '\u00a0';
       monthlyLabel.classList.toggle('active', !isAnnual);
       annualLabel.classList.toggle('active', isAnnual);
       pricingToggle.classList.toggle('annual', isAnnual);
@@ -311,5 +311,5 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
         item.querySelector('.faq-question').setAttribute('aria-expanded', String(allOpen));
       });
       faqToggleIcon.textContent = allOpen ? '−' : '+';
-      faqToggleAllBtn.lastChild.textContent = allOpen ? ' Collapse all' : ' Expand all';
+      faqToggleAllBtn.lastChild.textContent = allOpen ? ' Contraer todo' : ' Expandir todo';
     });
