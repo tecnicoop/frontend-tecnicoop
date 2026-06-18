@@ -4,6 +4,5 @@
  * Valentino Dilello
  * Lautaro Gómez
  * Santino Donati
- * Candela De La Cruz
 > [!NOTE]
 > Sitio web en desarrollo.
