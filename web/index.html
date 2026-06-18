@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="templatemo-622-clearwave.css" />
+  <link rel="stylesheet" href="chatbot-widget.css" />
 </head>
 <body>
 
@@ -729,6 +730,40 @@
     </div>
   </footer>
 
+  <!-- ── CHATBOT WIDGET ── -->
+  <button class="bot-fab" id="botFab" aria-label="Abrir chat">
+    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+    </svg>
+  </button>
+
+  <div class="bot-panel" id="botPanel">
+    <div class="bot-header">
+      <div class="bot-header-info">
+        <div class="bot-avatar">TC</div>
+        <div class="bot-header-text">
+          <h3>Asistente Tecnicoop</h3>
+          <span>En línea</span>
+        </div>
+      </div>
+      <button class="bot-close" id="botClose" aria-label="Cerrar chat">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+    <div class="bot-messages" id="botMessages"></div>
+    <div class="bot-input-wrap">
+      <textarea class="bot-input" id="botInput" rows="1" placeholder="Escribí un mensaje..." aria-label="Mensaje"></textarea>
+      <button class="bot-send" id="botSend" aria-label="Enviar">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
   <script src="templatemo-622-clearwave.js"></script>
+  <script src="chatbot-widget.js" defer></script>
 </body>
 </html>
