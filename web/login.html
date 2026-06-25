@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ingresar — InnovaTec</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="login.css" />
+</head>
+<body>
+  <main class="login-root">
+    <section class="login-card" role="main" aria-labelledby="login-title">
+      <div class="brand">
+        <a href="#" class="logo">InnovaTec</a>
+        <p class="brand-sub">Accede a tu panel</p>
+      </div>
+
+      <h1 id="login-title" class="title">Ingresar</h1>
+
+      <form class="login-form" autocomplete="on" novalidate>
+        <label for="email">Correo electrónico</label>
+        <input id="email" name="email" type="email" inputmode="email" autocomplete="email" required placeholder="tu@ejemplo.com" />
+
+        <label for="password">Contraseña</label>
+        <input id="password" name="password" type="password" autocomplete="current-password" required placeholder="••••••••" />
+
+        <div class="form-row">
+          <label class="remember">
+            <input type="checkbox" name="remember" />
+            <span>Recordarme</span>
+          </label>
+          <a href="#" class="forgot">Olvidé mi contraseña</a>
+        </div>
+
+        <button type="submit" class="btn-submit">Ingresar</button>
+      </form>
+
+      <div class="login-footer">¿No tienes cuenta? <a href="#">Crear una</a></div>
+    </section>
+  </main>
+
+  <script>
+    (function(){
+      const form = document.querySelector('.login-form');
+      form.addEventListener('submit', function(e){
+        e.preventDefault();
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+        // Placeholder: integrarlo con la lógica real de autenticación
+        alert('Envío simulado — integre su backend aquí.');
+      });
+    })();
+  </script>
+</body>
+</html>
