@@ -1,0 +1,25 @@
+{
+  "name": "frontend-tecnicoop",
+  "version": "1.0.0",
+  "description": "Frontend de Tecnicoop - Cooperativa de Servicios",
+  "type": "module",
+  "main": "web/index.html",
+  "scripts": {
+    "dev": "npx http-server web -p 8000 -c-1",
+    "start": "npx http-server web -p 3000"
+  },
+  "keywords": [
+    "tecnicoop",
+    "cooperativa",
+    "servicios"
+  ],
+  "author": "Tecnicoop",
+  "license": "MIT",
+  "dependencies": {
+    "@google/generative-ai": "^0.11.0"
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
