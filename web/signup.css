@@ -1,0 +1,115 @@
+:root{
+  /* Tokens copied from templatemo-622-clearwave.css to match palette */
+  --bg:           #E8F4F2;
+  --bg-alt:       #DFF0EE;
+  --surface:      #F4FAFA;
+  --surface-2:    #FFFFFF;
+  --accent:       #1A7A6E;
+  --accent-mid:   #2A9D8F;
+  --accent-light: #5BBFB5;
+  --accent-ghost: rgba(26,122,110,0.08);
+  --accent-border:rgba(26,122,110,0.15);
+  --text-1:       #0D1E1C;
+  --text-2:       #3A5C58;
+  --text-3:       #6B8C88;
+  --border:       rgba(13,30,28,0.08);
+  --shadow-sm:    0 2px 12px rgba(13,30,28,0.06);
+  --shadow-md:    0 8px 32px rgba(13,30,28,0.10);
+  --shadow-lg:    0 24px 64px rgba(13,30,28,0.13);
+  --radius:       12px;
+  --glass-blur:   8px;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: 'DM Sans', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  background: var(--bg);
+  color:var(--text-1);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  min-height:100vh;
+  display:grid;
+  place-items:center;
+  padding:32px;
+}
+
+.signup-root{width:100%;max-width:1120px}
+.signup-card{
+  width:100%;
+  max-width:420px;
+  background: var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:28px 28px 20px;
+  box-shadow: var(--shadow-md);
+}
+
+.brand{display:flex;flex-direction:column;align-items:flex-start;gap:6px;margin-bottom:8px}
+.logo{font-family:'Playfair Display', Georgia, serif;color:var(--text-1);font-size:1.45rem;text-decoration:none;transition:color .18s ease}
+.logo:hover{color:var(--accent-mid)}
+.brand-sub{color:var(--text-2);font-size:.95rem;margin:0}
+
+.title{font-size:1.5rem;margin:12px 0 18px}
+
+.signup-form{display:flex;flex-direction:column;gap:12px}
+.signup-form label{font-size:.85rem;color:var(--text-2);margin-bottom:6px}
+.signup-form input[type="text"],
+.signup-form input[type="email"],
+.signup-form input[type="password"]{
+  width:100%;
+  padding:12px 14px;
+  border-radius:10px;
+  border:1px solid var(--border);
+  background: var(--surface-2);
+  color:var(--text-1);
+  font-size:1rem;
+  outline:none;
+  transition:box-shadow .18s ease, border-color .18s ease, transform .08s ease;
+}
+.signup-form input::placeholder{color:var(--text-3)}
+.signup-form input:focus{border-color:var(--accent);box-shadow:0 6px 20px rgba(26,122,110,0.08);transform:translateY(-1px)}
+
+.form-row{display:flex;align-items:flex-start;gap:12px}
+.accept-terms{display:inline-flex;align-items:flex-start;gap:8px;color:var(--text-2);font-size:.92rem;cursor:pointer}
+.accept-terms input{width:16px;height:16px;border-radius:4px;margin-top:3px;flex-shrink:0;cursor:pointer}
+.accept-terms a{color:var(--accent);text-decoration:none}
+.accept-terms a:hover{text-decoration:underline}
+
+.btn-submit{
+  width:100%;
+  padding:12px 16px;
+  border-radius:10px;
+  border:0;
+  cursor:pointer;
+  color:white;
+  font-weight:600;
+  background: var(--accent);
+  box-shadow: 0 6px 24px rgba(26,122,110,0.25);
+  transition:transform .12s ease, box-shadow .12s ease, opacity .12s ease;
+  margin-top:8px;
+}
+.btn-submit:hover{background:var(--accent-mid);box-shadow:0 8px 32px rgba(26,122,110,0.35)}
+.btn-submit:active{transform:translateY(1px)}
+.btn-submit:disabled{opacity:.6;cursor:not-allowed}
+
+.signup-footer{margin-top:14px;font-size:.95rem;color:var(--text-2);text-align:center}
+.signup-footer a{color:var(--accent);text-decoration:underline;transition:color .18s ease}
+.signup-footer a:hover{color:var(--accent-mid)}
+
+.signup-footer-secondary{margin-top:10px;font-size:.92rem;color:var(--text-3);text-align:center}
+.signup-footer-secondary a{color:var(--text-2);text-decoration:none;transition:color .18s ease}
+.signup-footer-secondary a:hover{color:var(--accent)}
+
+/* Responsive */
+@media (max-width:520px){
+  body{padding:18px}
+  .signup-card{padding:20px}
+  .logo{font-size:1.25rem}
+  .title{font-size:1.25rem}
+}
+
+/* Subtle entrance */
+.signup-card{transform:translateY(6px);opacity:0;animation:enter .42s ease .06s forwards}
+@keyframes enter{to{transform:none;opacity:1}}
