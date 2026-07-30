@@ -10,9 +10,9 @@ Free for personal and commercial use
       --bg-alt:       #DFF0EE;
       --surface:      #F4FAFA;
       --surface-2:    #FFFFFF;
-      --accent:       #1A7A6E;
-      --accent-mid:   #2A9D8F;
-      --accent-light: #5BBFB5;
+      --accent:       #243b68;
+      --accent-mid:   #3d5594;
+      --accent-light: #657cb6;
       --accent-ghost: rgba(26,122,110,0.08);
       --accent-border:rgba(26,122,110,0.15);
       --text-1:       #0D1E1C;
@@ -114,8 +114,13 @@ Free for personal and commercial use
       max-width: 1160px; margin: 0 auto; padding: 0 32px;
     }
     .nav-logo {
-      font-size: 1.25rem; font-weight: 700; letter-spacing: -0.04em;
-      color: var(--text-1);
+      margin: 0;
+      padding: 0;
+    }
+    .nav-logo img { 
+      height: 50px;
+      margin: 0;
+      padding: 0; 
     }
     .nav-logo span { color: var(--accent); }
     .nav-links {
@@ -1001,6 +1006,15 @@ Free for personal and commercial use
       display: flex; align-items: center; justify-content: center;
       color: rgba(255,255,255,0.4); font-size: 14px; font-weight: 700;
       transition: all 0.4s var(--silk);
+    }
+    .footer-brand .nav-logo{
+      margin: 0;
+      padding: 0; 
+    }
+    .footer-brand .nav-logo img{
+      height: 100px;
+      margin: 0;
+      padding: 0; 
     }
     .social-btn:hover { border-color: var(--accent-light); color: var(--accent-light); }
     .footer-col-label {
