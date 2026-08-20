@@ -14,8 +14,8 @@ class GeminiService {
   }
 
   /**
-   * Valida los datos de registro usando Gemini
-   * @param {Object} userData - Datos del usuario { name, email, password }
+   * Valida los datos de solicitud de membresía usando Gemini
+   * @param {Object} userData - Datos del usuario { name, email, curso, motivo }
    * @returns {Promise<Object>} Validación y sugerencias
    */
   async validateSignupData(userData) {
@@ -26,11 +26,13 @@ class GeminiService {
 
     try {
       const prompt = `
-Eres un validador de registros de usuario para una plataforma de cooperativa de servicios.
-Valida los siguientes datos de registro y proporciona retroalimentación:
+Eres un validador de solicitudes de membresía para una cooperativa escolar de servicios técnicos (ETec Ltda.).
+Valida los siguientes datos de solicitud y proporciona retroalimentación:
 
 Nombre: ${userData.name}
 Email: ${userData.email}
+Curso: ${userData.curso}
+Motivación: ${userData.motivo}
 
 Por favor responde en JSON con este formato exacto:
 {
@@ -43,6 +45,8 @@ Por favor responde en JSON con este formato exacto:
 Considera:
 - ¿Es un nombre válido y apropiado?
 - ¿Es un email válido?
+- ¿El curso menciona 5.º o 6.º año?
+- ¿La motivación es genuina y coherente con una cooperativa escolar?
 - ¿Hay alguna bandera de seguridad?
 `;
 
@@ -110,6 +114,18 @@ Considera:
       issues.push('El email no es válido');
     }
 
+    // Validar curso
+    if (!userData.curso || userData.curso.length < 3) {
+      issues.push('Por favor indicá tu curso (5.º o 6.º año)');
+    } else if (!/(5\.?[°º]?|6\.?[°º]?)/i.test(userData.curso)) {
+      suggestions.push('Recordá que la membresía es para 5.º o 6.º año');
+    }
+
+    // Validar motivación
+    if (!userData.motivo || userData.motivo.length < 20) {
+      issues.push('La motivación debe tener al menos 20 caracteres');
+    }
+
     // Sugerencias
     if (userData.name) {
       suggestions.push('✓ El nombre se ve bien');
@@ -117,13 +133,19 @@ Considera:
     if (userData.email && emailRegex.test(userData.email)) {
       suggestions.push('✓ Email válido');
     }
+    if (userData.curso && /(5\.?[°º]?|6\.?[°º]?)/i.test(userData.curso)) {
+      suggestions.push('✓ Curso habilitado para la cooperativa');
+    }
+    if (userData.motivo && userData.motivo.length >= 20) {
+      suggestions.push('✓ Motivación completada');
+    }
 
     return {
       isValid: issues.length === 0,
       issues,
       suggestions,
-      message: issues.length === 0 
-        ? 'Datos válidos. Puedes continuar con el registro.'
+      message: issues.length === 0
+        ? 'Datos válidos. Puedes enviar la solicitud.'
         : 'Por favor corrige los siguientes errores.'
     };
   }
