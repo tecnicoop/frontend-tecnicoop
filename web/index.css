@@ -97,7 +97,12 @@ Free for personal and commercial use
        1. NAV
     ══════════════════════════════════════════ */
     .nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      position: fixed; 
+      top: 0; 
+      left: 0; 
+      right: 0; 
+      z-index: 1000;
+      margin: 0 0 0 5vh;
       padding: 20px 0;
       transition: padding var(--silk-dur) var(--silk), background var(--silk-dur) var(--silk), box-shadow var(--silk-dur) var(--silk);
     }
@@ -115,15 +120,30 @@ Free for personal and commercial use
     .nav-logo {
       margin: 0;
       padding: 0;
+      margin-right: 48px;
+      margin-left: -50px;
     }
-    .nav-logo img { 
+    .nav-logo img {
       height: 50px;
       margin: 0;
-      padding: 0; 
+      padding: 0;
     }
     .nav-logo span { color: var(--accent); }
+    .nav-center {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      flex: 1;
+      justify-content: flex-end;
+      min-width: 0;
+    }
     .nav-links {
-      display: flex; align-items: center; gap: 36px;
+      display: flex; align-items: center; gap: 10px;
+      margin: 0 0 0 10px;
+      white-space: nowrap;
+    }
+    .nav-links li {
+      flex-shrink: 0;
     }
     .nav-links a {
       font-size: 0.9rem; font-weight: 500; color: var(--text-2);
@@ -131,6 +151,7 @@ Free for personal and commercial use
       background: transparent;
       box-shadow: inset 0 0 0 0px var(--accent-border);
       transition: color 0.4s var(--silk), background 0.4s var(--silk), box-shadow 0.4s var(--silk);
+      white-space: nowrap;
     }
     .nav-links a:hover {
       color: var(--accent);
@@ -139,6 +160,7 @@ Free for personal and commercial use
     }
     .nav-cta {
       display: flex; align-items: center; gap: 12px;
+      flex-shrink: 0;
     }
     .btn-ghost {
       font-size: 0.875rem; font-weight: 500; color: var(--text-2);
@@ -522,20 +544,40 @@ Free for personal and commercial use
       border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
       overflow: hidden;
     }
-    .carousel-header { text-align: center; margin-bottom: 0; }
-    .carousel-header .section-sub { margin: 16px auto 0; text-align:justify; min-width: 40vh;}
 
-    .carousel-stage {
-      position: relative;
-      height: clamp(480px, 52vw, 780px);
-      perspective: clamp(900px, 120vw, 1800px);
-      perspective-origin: center center;
-      display: flex; align-items: center; justify-content: center;
+    /* ==========================================
+   Sección: Carousel Header / Nuestra Identidad
+   ========================================== */
+
+    .carousel-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+      padding: 2rem 1rem;
     }
-    .carousel-track {
-      position: relative; width: 100%; height: 100%;
-      transform-style: preserve-3d;
-      display: flex; align-items: center; justify-content: center;
+
+    .section-title {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      line-height: 0.85;
+      margin-bottom: 1.5rem;
+      font-weight: 700;
+    }
+
+    .section-title em {
+      font-style: italic;
+      font-weight: 600;
+      display: inline-block;
+    }
+
+    .section-sub {
+      width: 100vh;           /* Ancho solicitado */
+      max-width: 100%;       /* Evita desbordes en pantallas muy pequeñas */
+      margin-inline: auto;   /* Centrado del bloque */
+      text-align: center;    /* Centrado del texto */
+      line-height: 1.6;
+      font-size: 0.95rem;
     }
 
     /* Single source of truth: --pw = phone width, drives all offsets */
@@ -1063,7 +1105,21 @@ Free for personal and commercial use
       .nav-links, .nav-cta { display: none; }
       .nav-hamburger { display: flex; }
       .testimonials-grid { grid-template-columns: 1fr; }
+      /* Nav adjustments for tablets/smaller laptops */
+      .nav-links { gap: 16px; }
+      .nav-links a { padding: 6px 12px; font-size: 0.85rem; }
+      .nav-cta { gap: 8px; }
+      .btn-ghost { padding: 8px 16px; font-size: 0.825rem; }
+      .btn-primary { padding: 9px 18px; font-size: 0.825rem; }
       .testimonial-card.tall { grid-row: auto; }
+    @media (max-width: 900px) {
+      .nav-links { gap: 12px; }
+      .nav-links a { padding: 6px 10px; font-size: 0.825rem; }
+      .nav-cta { gap: 6px; }
+      .btn-ghost { padding: 7px 14px; font-size: 0.8rem; }
+      .btn-primary { padding: 8px 16px; font-size: 0.8rem; }
+      .nav-center { gap: 20px; }
+    }
       .footer-grid { grid-template-columns: 1fr; }
       .cta-inner { padding: 40px 24px; }
       .pricing-grid { max-width: 100%; }
