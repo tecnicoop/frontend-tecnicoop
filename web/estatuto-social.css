@@ -1,0 +1,406 @@
+/**
+ * ============================================================
+ * ESTATUTO SOCIAL — Estilos específicos de la página
+ * ============================================================
+ * Usa los mismos tokens que index.css para consistencia visual 100%
+ * ============================================================
+ */
+
+/* ═══════════════════════════════════════════════════════
+   MAIN LAYOUT
+   ═══════════════════════════════════════════════════════ */
+
+.estatuto-main {
+  padding: calc(100px + 4rem) 0 6rem;
+  min-height: 100vh;
+}
+
+/* ═══════════════════════════════════════════════════════
+   HEADER DEL ESTATUTO
+   ═══════════════════════════════════════════════════════ */
+
+.estatuto-header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 5rem;
+  padding: 2rem 1.5rem;
+}
+
+.estatuto-header .section-label {
+  margin-bottom: 1.5rem;
+}
+
+.estatuto-title {
+  font-size: clamp(2.5rem, 5vw + 1rem, 4rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.04em;
+  margin-bottom: 1rem;
+  color: var(--text-1);
+  font-family: 'DM Sans', sans-serif;
+}
+
+.estatuto-title em {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.estatuto-subtitle {
+  font-size: clamp(1.25rem, 2vw + 0.75rem, 1.75rem);
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+  font-style: italic;
+  font-family: 'Playfair Display', serif;
+}
+
+.estatuto-intro {
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: var(--text-2);
+  margin: 0 auto;
+  max-width: 680px;
+}
+
+/* ═══════════════════════════════════════════════════════
+   DOCUMENTO DEL ESTATUTO
+   ═══════════════════════════════════════════════════════ */
+
+.estatuto-doc {
+  max-width: 800px;
+  margin: 0 auto 6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+/* Capítulos — Glassmorphism consistente con index */
+.estatuto-cap {
+  padding: 2.5rem;
+  background: rgba(255, 255, 255, 0.7);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  backdrop-filter: blur(16px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(13, 30, 28, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  transition: box-shadow 0.8s var(--silk), border-color 0.8s var(--silk);
+}
+
+.estatuto-cap:hover {
+  box-shadow: 0 16px 48px rgba(13, 30, 28, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.estatuto-cap-title {
+  font-size: clamp(1.5rem, 2.5vw + 0.5rem, 2rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.04em;
+  color: var(--text-1);
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--accent);
+  display: inline-block;
+}
+
+/* Párrafos */
+.estatuto-p {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--text-2);
+  margin-bottom: 1.25rem;
+}
+
+.estatuto-p:last-child {
+  margin-bottom: 0;
+}
+
+/* Listas ordenadas con contador estilo legal */
+.estatuto-list {
+  list-style: none;
+  counter-reset: estatuto-item;
+  margin: 1rem 0 1rem 0.5rem;
+}
+
+.estatuto-list li {
+  position: relative;
+  padding-left: 2.5rem;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--text-2);
+}
+
+.estatuto-list li::before {
+  counter-increment: estatuto-item;
+  content: counter(estatuto-item) ".";
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--accent);
+  width: 2rem;
+  text-align: right;
+}
+
+/* Blockquote estilo legal */
+.estatuto-quote {
+  border-left: 4px solid var(--accent);
+  padding: 1.5rem 2rem;
+  margin: 2rem 0;
+  background: var(--accent-ghost);
+  border-radius: 0 16px 16px 0;
+  font-style: italic;
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: var(--text-1);
+  position: relative;
+}
+
+.estatuto-quote::before {
+  content: '"';
+  font-family: 'Playfair Display', serif;
+  font-size: 4rem;
+  font-weight: 700;
+  color: var(--accent);
+  opacity: 0.2;
+  position: absolute;
+  top: -0.5rem;
+  left: 0.5rem;
+  line-height: 1;
+  pointer-events: none;
+}
+
+/* Grid de artículos */
+.estatuto-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.estatuto-card {
+  padding: 1.5rem;
+  background: var(--surface-2);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 16px;
+  transition: transform 0.8s var(--silk), box-shadow 0.8s var(--silk), border-color 0.8s var(--silk);
+}
+
+.estatuto-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(13, 30, 28, 0.10);
+  border-color: var(--accent-border);
+}
+
+.estatuto-card-title {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 0.75rem;
+  font-family: 'Playfair Display', serif;
+}
+
+.estatuto-card .estatuto-p {
+  margin-bottom: 0;
+  font-size: 0.875rem;
+}
+
+/* ═══════════════════════════════════════════════════════
+   TABLE OF CONTENTS (TOC)
+   ═══════════════════════════════════════════════════════ */
+
+.estatuto-toc {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.7);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  backdrop-filter: blur(16px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(13, 30, 28, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.estatuto-toc .section-label {
+  margin-bottom: 1.5rem;
+  display: inline-block;
+}
+
+.estatuto-toc-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.estatuto-toc-list li a {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-2);
+  border-radius: 16px;
+  background: var(--surface-2);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  transition: all 0.4s var(--silk);
+}
+
+.estatuto-toc-list li a:hover {
+  color: var(--accent);
+  background: var(--accent-ghost);
+  border-color: var(--accent-border);
+  transform: translateX(4px);
+}
+
+.estatuto-toc-list li a::before {
+  content: '→';
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: var(--accent);
+  opacity: 0.6;
+  transition: opacity 0.4s var(--silk), transform 0.4s var(--silk);
+}
+
+.estatuto-toc-list li a:hover::before {
+  opacity: 1;
+  transform: translateX(4px);
+}
+
+/* ═══════════════════════════════════════════════════════
+   RESPONSIVE — Mismos breakpoints que index.css
+   ═══════════════════════════════════════════════════════ */
+
+@media (max-width: 1024px) {
+  .estatuto-main {
+    padding: calc(80px + 3rem) 0 5rem;
+  }
+
+  .estatuto-header {
+    margin-bottom: 4rem;
+    padding: 1.5rem 1rem;
+  }
+
+  .estatuto-cap {
+    padding: 2rem;
+  }
+
+  .estatuto-toc {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .estatuto-main {
+    padding: calc(80px + 2.5rem) 0 4rem;
+  }
+
+  .estatuto-header {
+    margin-bottom: 3rem;
+    padding: 1rem 0.75rem;
+  }
+
+  .estatuto-title {
+    font-size: clamp(2rem, 6vw + 1rem, 2.8rem);
+  }
+
+  .estatuto-subtitle {
+    font-size: clamp(1.1rem, 3vw + 0.5rem, 1.4rem);
+  }
+
+  .estatuto-intro {
+    font-size: 0.9375rem;
+  }
+
+  .estatuto-cap {
+    padding: 1.5rem;
+  }
+
+  .estatuto-cap-title {
+    font-size: clamp(1.3rem, 4vw + 0.5rem, 1.6rem);
+  }
+
+  .estatuto-p {
+    font-size: 0.9375rem;
+  }
+
+  .estatuto-list li {
+    font-size: 0.9375rem;
+    padding-left: 2rem;
+  }
+
+  .estatuto-list li::before {
+    width: 1.5rem;
+    font-size: 0.9375rem;
+  }
+
+  .estatuto-quote {
+    padding: 1.25rem 1.5rem;
+    font-size: 0.9375rem;
+  }
+
+  .estatuto-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .estatuto-card {
+    padding: 1.25rem;
+  }
+
+  .estatuto-toc {
+    padding: 1.25rem;
+  }
+
+  .estatuto-toc-list li a {
+    padding: 0.75rem 1rem;
+    font-size: 0.9375rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .estatuto-main {
+    padding: calc(80px + 2rem) 0 3rem;
+  }
+
+  .estatuto-title {
+    font-size: clamp(1.8rem, 6vw + 1rem, 2.4rem);
+  }
+
+  .estatuto-subtitle {
+    font-size: clamp(1rem, 3.5vw + 0.4rem, 1.2rem);
+  }
+
+  .estatuto-cap-title {
+    font-size: 1.25rem;
+  }
+
+  .estatuto-quote::before {
+    font-size: 3rem;
+    top: -0.3rem;
+  }
+
+  .estatuto-toc-list li a {
+    padding: 0.75rem 0.75rem;
+    font-size: 0.875rem;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════
+   REDUCED MOTION
+   ═══════════════════════════════════════════════════════ */
+
+@media (prefers-reduced-motion: reduce) {
+  .estatuto-cap,
+  .estatuto-card,
+  .estatuto-toc-list li a {
+    transition: none !important;
+  }
+}

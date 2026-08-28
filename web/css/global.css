@@ -1,0 +1,472 @@
+/**
+ * ============================================================
+ * INNOVATEC — CSS GLOBAL (Reset + Base + Utilidades)
+ * ============================================================
+ * Depende de: variables.css (tokens)
+ * Este archivo NO define colores ni fuentes hardcodeadas:
+ * todo proviene de las variables globales.
+ * ============================================================
+ */
+
+/* ═══════════════════════════════════════════════════════
+   1. RESET MODERNO
+   ═══════════════════════════════════════════════════════ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-padding-top: 100px; /* Evita que las secciones queden ocultas bajo el navbar */
+}
+
+body {
+  font-family: var(--font-body);
+  font-weight: var(--font-weight-regular);
+  background-color: var(--color-bg);
+  color: var(--color-text-1);
+  line-height: var(--leading-normal);
+  overflow-x: hidden;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  transition: background-color var(--duration-normal) var(--ease-silk),
+              color var(--duration-normal) var(--ease-silk);
+}
+
+/* Elementos base */
+img { display: block; max-width: 100%; height: auto; }
+a { text-decoration: none; color: inherit; cursor: pointer; }
+ul, ol { list-style: none; }
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+input, select, textarea {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+table { border-collapse: collapse; }
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+}
+
+/* ═══════════════════════════════════════════════════════
+   2. ACCESIBILIDAD / FOCUS VISIBLE
+   ═══════════════════════════════════════════════════════ */
+
+:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+  border-radius: var(--radius-sm);
+}
+
+/* Focus específico en inputs */
+input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: none;
+  border-color: var(--color-primary) !important;
+  box-shadow: var(--focus-ring) !important;
+}
+
+/* ═══════════════════════════════════════════════════════
+   3. SCROLLBAR PERSONALIZADO
+   ═══════════════════════════════════════════════════════ */
+
+::-webkit-scrollbar { width: var(--scrollbar-width); height: var(--scrollbar-width); }
+::-webkit-scrollbar-track { background: var(--scrollbar-track); }
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: var(--radius-full);
+}
+::-webkit-scrollbar-thumb:hover { background: var(--scrollbar-thumb-hover); }
+
+/* Firefox */
+* { scrollbar-width: thin; scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track); }
+
+/* ═══════════════════════════════════════════════════════
+   4. SELECCIÓN DE TEXTO
+   ═══════════════════════════════════════════════════════ */
+
+::selection {
+  background: var(--color-primary);
+  color: var(--color-text-inverse);
+}
+
+/* ═══════════════════════════════════════════════════════
+   5. UTILIDADES GLOBALES
+   ═══════════════════════════════════════════════════════ */
+
+/* Contenedor centralizado */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+@media (max-width: 768px) {
+  .container { padding: 0 var(--container-padding-sm); }
+}
+
+/* Ocultar visualmente pero mantener accesible */
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Texto centrado */
+.text-center { text-align: center; }
+
+/* Flex helpers */
+.flex { display: flex; }
+.flex-center { display: flex; align-items: center; justify-content: center; }
+.flex-between { display: flex; align-items: center; justify-content: space-between; }
+.flex-col { display: flex; flex-direction: column; }
+
+/* Grid helpers */
+.grid { display: grid; }
+.gap-2 { gap: var(--space-2); }
+.gap-4 { gap: var(--space-4); }
+.gap-6 { gap: var(--space-6); }
+.gap-8 { gap: var(--space-8); }
+
+/* Márgenes */
+.mt-4 { margin-top: var(--space-4); }
+.mt-6 { margin-top: var(--space-6); }
+.mt-8 { margin-top: var(--space-8); }
+.mb-4 { margin-bottom: var(--space-4); }
+.mb-6 { margin-bottom: var(--space-6); }
+.mb-8 { margin-bottom: var(--space-8); }
+
+/* ═══════════════════════════════════════════════════════
+   6. ANIMACIONES BASE
+   ═══════════════════════════════════════════════════════ */
+
+/* Fade-in al cargar */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Slide-up sutil */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Entrada suave de cards */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
+}
+
+/* Reflejo / brillo animado para glass */
+@keyframes shimmer {
+  0%   { transform: translateX(-150%) skewX(-15deg); }
+  100% { transform: translateX(250%) skewX(-15deg); }
+}
+
+/* Pulso para indicadores "en vivo" */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.4; }
+}
+
+/* Girar suave */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Respecto a prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════
+   7. REVEAL ON SCROLL (utilidad base)
+   ═══════════════════════════════════════════════════════ */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity var(--duration-silk) var(--ease-silk),
+              transform var(--duration-silk) var(--ease-silk);
+  will-change: opacity, transform;
+}
+.reveal.visible { opacity: 1; transform: none; }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* ═══════════════════════════════════════════════════════
+   8. GLASSMORPHISM — CLASE REUTILIZABLE
+   ============================================================
+   Uso:  <div class="glass"> ... </div>
+   Efecto: superficie semitransparente + blur de fondo + borde
+   luminoso + reflejo superior. Se combina con el fondo animado
+   (.bg-orbs) para que el cristal "refracte" los colores.
+   ============================================================ */
+
+.glass {
+  background: var(--color-surface-glass);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(160%);
+  backdrop-filter: blur(var(--glass-blur)) saturate(160%);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--glass-shadow),
+              inset 0 1px 0 var(--glass-highlight);
+  position: relative;
+}
+
+/* Variante: más opaco / más blur para paneles que necesitan lectura */
+.glass-strong {
+  background: var(--color-surface-glass-strong);
+  -webkit-backdrop-filter: blur(var(--glass-blur-strong)) saturate(180%);
+  backdrop-filter: blur(var(--glass-blur-strong)) saturate(180%);
+  border: 1px solid var(--glass-border-strong);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--glass-shadow-strong),
+              inset 0 1px 0 var(--glass-highlight);
+}
+
+/* Reflejo líquido superior (shine) — pseudo-elemento */
+.glass::before,
+.glass-strong::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 50%;
+  background: linear-gradient(180deg,
+              var(--glass-highlight-strong) 0%,
+              var(--glass-highlight-subtle) 40%,
+              transparent 100%);
+  border-radius: inherit;
+  border-bottom-left-radius: 50% 18%;
+  border-bottom-right-radius: 50% 18%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Reflejo tipo brillo diagonal animado (opcional, añadir .glass-shine) */
+.glass-shine::after {
+  content: '';
+  position: absolute;
+  top: -50%; bottom: -50%; left: 0;
+  width: 40%;
+  background: linear-gradient(90deg, transparent, var(--glass-highlight), transparent);
+  transform: translateX(-150%) skewX(-15deg);
+  pointer-events: none;
+  z-index: 2;
+}
+.glass-shine:hover::after { animation: shimmer 1.2s var(--ease-silk); }
+
+/* ═══════════════════════════════════════════════════════
+   9. BOTONES BASE (primitivos)
+   ═══════════════════════════════════════════════════════ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-full);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--leading-snug);
+  white-space: nowrap;
+  transition: transform var(--duration-normal) var(--ease-silk),
+              box-shadow var(--duration-normal) var(--ease-silk),
+              background-color var(--duration-normal) var(--ease-silk),
+              color var(--duration-normal) var(--ease-silk),
+              border-color var(--duration-normal) var(--ease-silk);
+}
+.btn:active { transform: scale(0.97); }
+
+/* Botón primario */
+.btn-primary {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
+  color: var(--color-text-inverse);
+  box-shadow: var(--shadow-primary-sm), inset 0 1px 0 var(--glass-highlight);
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-primary-md), inset 0 1px 0 var(--glass-highlight);
+}
+
+/* Botón secundario (outline) */
+.btn-outline {
+  background: transparent;
+  color: var(--color-primary);
+  border: 1.5px solid var(--color-primary-border);
+}
+.btn-outline:hover {
+  background: var(--color-primary-ghost);
+  border-color: var(--color-primary);
+  transform: translateY(-2px);
+}
+
+/* Botón ghost (sin borde) */
+.btn-ghost {
+  background: transparent;
+  color: var(--color-text-2);
+}
+.btn-ghost:hover { color: var(--color-primary); }
+
+/* Botón glass (para sobre fondos con color) */
+.btn-glass {
+  background: var(--color-surface-glass);
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  backdrop-filter: blur(var(--glass-blur));
+  color: var(--color-text-1);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow), inset 0 1px 0 var(--glass-highlight);
+}
+.btn-glass:hover { transform: translateY(-2px); box-shadow: var(--glass-shadow-strong); }
+
+/* Botón peligro */
+.btn-danger {
+  background: var(--color-error);
+  color: var(--color-text-inverse);
+}
+.btn-danger:hover { filter: brightness(1.1); transform: translateY(-1px); }
+
+/* Botón bloque */
+.btn-block { width: 100%; }
+
+/* Botón loading (spinner) */
+.btn.loading { pointer-events: none; opacity: 0.7; }
+.btn.loading .spinner {
+  width: 16px; height: 16px;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+/* ═══════════════════════════════════════════════════════
+   10. FORMULARIOS — PRIMITIVOS
+   ═══════════════════════════════════════════════════════ */
+
+.form-field { display: flex; flex-direction: column; gap: var(--space-2); }
+
+.form-label {
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-2);
+}
+
+.form-input {
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface-2);
+  color: var(--color-text-1);
+  font-size: var(--text-md);
+  transition: border-color var(--duration-fast) var(--ease-silk),
+              box-shadow var(--duration-fast) var(--ease-silk);
+}
+.form-input::placeholder { color: var(--color-text-3); }
+.form-input:focus {
+  border-color: var(--color-primary);
+  box-shadow: var(--focus-ring);
+  outline: none;
+}
+
+/* Input con error */
+.form-input.has-error {
+  border-color: var(--color-error);
+  background: var(--color-error-ghost);
+}
+
+/* Mensaje de feedback bajo input */
+.form-hint { font-size: var(--text-xs); color: var(--color-text-3); }
+.form-error { font-size: var(--text-xs); color: var(--color-error); }
+.form-success { font-size: var(--text-xs); color: var(--color-success); }
+
+/* ���������������������������������������������������������������������������������������������������������������
+   11. FONDO DECORATIVO SUTIL (mesh gradient + dots + blobs)
+   ============================================================
+   Uso:  <div class="bg-decor"></div>
+   Se coloca al inicio del body, z-index -1, detrás de todo.
+   No usa glassmorphism — es puramente decorativo.
+   ============================================================ */
+
+.bg-decor {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+  background:
+    /* Mesh gradient base */
+    radial-gradient(ellipse 80% 50% at 20% 20%, var(--color-primary-ghost) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 80%, var(--color-secondary-ghost) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 50% at 50% 50%, var(--color-info) 0%, transparent 70%);
+}
+
+/* Patrón de puntos sutiles */
+.bg-decor::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(13, 30, 28, 0.04) 1px, transparent 0);
+  background-size: 40px 40px;
+  mask-image: radial-gradient(ellipse at center, black 40%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 70%);
+}
+
+/* Blobs animados suaves */
+.bg-decor::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 30% 20% at 15% 30%, var(--color-primary-ghost) 0%, transparent 70%),
+    radial-gradient(ellipse 25% 15% at 85% 70%, var(--color-secondary-ghost) 0%, transparent 70%),
+    radial-gradient(ellipse 20% 20% at 50% 50%, var(--color-primary-ghost) 0%, transparent 80%);
+  animation: blobFloat 20s var(--ease-in-out) infinite alternate;
+  opacity: 0.6;
+}
+
+@keyframes blobFloat {
+  0%   { transform: translate(0, 0) scale(1) rotate(0deg); }
+  25%  { transform: translate(2vw, 1vh) scale(1.05) rotate(2deg); }
+  50%  { transform: translate(-1vw, 3vh) scale(0.98) rotate(-1deg); }
+  75%  { transform: translate(3vw, -1vh) scale(1.03) rotate(1deg); }
+  100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+}
+
+/* Respecto a prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .bg-decor::after { animation: none; }
+}
+

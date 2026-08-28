@@ -1,0 +1,277 @@
+/**
+ * ============================================================
+ * INNOVATEC — SISTEMA DE DISEÑO (Design Tokens)
+ * ============================================================
+ * Todos los valores globales centralizados aquí.
+ * Cuando tengas la paleta del logo, cambia SOLO la sección "COLORES".
+ * El resto del sitio se actualiza automático.
+ * ============================================================
+ */
+
+:root {
+  /* ═══════════════════════════════════════════════════════
+     🎨 COLORES — CAMBIA ESTA SECCIÓN CON TU PALETA DEL LOGO
+     ═══════════════════════════════════════════════════════ */
+
+  /* --- Color primario (Brand) --- */
+  --color-primary:           #1A7A6E;      /* Principal — teal oscuro elegante */
+  --color-primary-hover:     #2A9D8F;      /* Hover — más claro */
+  --color-primary-light:     #5BBFB5;      /* Light — acentos suaves */
+  --color-primary-ghost:     rgba(26, 122, 110, 0.08);   /* Fondos sutiles */
+  --color-primary-border:    rgba(26, 122, 110, 0.15);   /* Bordes sutiles */
+  --color-primary-glass:     rgba(26, 122, 110, 0.12);   /* Glassmorphism tint */
+
+  /* --- Color secundario (Accent complementario) --- */
+  --color-secondary:         #3D5594;      /* Azul académico */
+  --color-secondary-hover:   #4D6BB6;
+  --color-secondary-light:   #657CB6;
+  --color-secondary-ghost:   rgba(61, 85, 148, 0.08);
+
+  /* --- Colores de estado --- */
+  --color-success:           #28CA41;
+  --color-success-ghost:     rgba(40, 202, 65, 0.12);
+  --color-warning:           #FFBD2E;
+  --color-warning-ghost:     rgba(255, 189, 46, 0.12);
+  --color-error:             #FF5F57;
+  --color-error-ghost:       rgba(255, 95, 87, 0.12);
+  --color-info:              #5BBFB5;
+
+  /* --- Neutros / Superficies --- */
+  --color-bg:                #E8F4F2;      /* Fondo principal página */
+  --color-bg-alt:            #DFF0EE;      /* Fondo alternativo (secciones) */
+  --color-surface:           #F4FAFA;      /* Tarjetas, paneles */
+  --color-surface-2:         #FFFFFF;      /* Tarjetas elevadas, modales */
+  --color-surface-glass:     rgba(255, 255, 255, 0.7);   /* Glassmorphism base */
+  --color-surface-glass-strong: rgba(255, 255, 255, 0.85); /* Glass más opaco */
+
+  /* --- Texto --- */
+  --color-text-1:            #0D1E1C;      /* Principal — casi negro teal */
+  --color-text-2:            #3A5C58;      /* Secundario */
+  --color-text-3:            #6B8C88;      /* Terciario / placeholder */
+  --color-text-inverse:      #FFFFFF;      /* Sobre fondos oscuros */
+  --color-text-muted:        rgba(13, 30, 28, 0.45);
+
+  /* --- Bordes --- */
+  --color-border:            rgba(13, 30, 28, 0.08);
+  --color-border-strong:     rgba(13, 30, 28, 0.15);
+  --color-border-focus:      var(--color-primary);
+
+  /* ═══════════════════════════════════════════════════════
+     🔤 TIPOGRAFÍA
+     ═══════════════════════════════════════════════════════ */
+
+  /* Fuentes */
+  --font-display:            'Montserrat', 'DM Sans', system-ui, -apple-system, sans-serif;  /* Títulos - NEGRITA */
+  --font-body:               'Montserrat', 'DM Sans', system-ui, -apple-system, sans-serif;  /* Textos - NORMAL */
+
+  /* Pesos */
+  --font-weight-light:       300;
+  --font-weight-regular:     400;
+  --font-weight-medium:      500;
+  --font-weight-semibold:    600;
+  --font-weight-bold:        700;
+  --font-weight-extrabold:   800;
+
+  /* Tamaños (clamp = responsive fluido) */
+  --text-xs:                 0.6875rem;    /* 11px */
+  --text-sm:                 0.8125rem;    /* 13px */
+  --text-base:               0.9375rem;    /* 15px */
+  --text-md:                 1rem;         /* 16px */
+  --text-lg:                 1.0625rem;    /* 17px */
+  --text-xl:                 1.25rem;      /* 20px */
+  --text-2xl:                1.5rem;       /* 24px */
+  --text-3xl:                clamp(1.875rem, 3.5vw, 2.5rem);   /* 30-40px */
+  --text-4xl:                clamp(2.25rem, 4.5vw, 3.5rem);    /* 36-56px */
+  --text-5xl:                clamp(3rem, 6vw, 4.5rem);          /* 48-72px */
+
+  /* Line heights */
+  --leading-tight:           1.15;
+  --leading-snug:            1.35;
+  --leading-normal:          1.6;
+  --leading-relaxed:         1.75;
+  --leading-loose:           2;
+
+  /* Letter spacing */
+  --tracking-tight:          -0.04em;
+  --tracking-normal:         0;
+  --tracking-wide:           0.02em;
+  --tracking-wider:          0.08em;
+  --tracking-widest:         0.14em;       /* Para labels uppercase */
+
+  /* ═══════════════════════════════════════════════════════
+     📏 ESPACIADO (Escala 4px base)
+     ═══════════════════════════════════════════════════════ */
+
+  --space-0:                 0;
+  --space-1:                 0.25rem;   /* 4px */
+  --space-2:                 0.5rem;    /* 8px */
+  --space-3:                 0.75rem;   /* 12px */
+  --space-4:                 1rem;      /* 16px */
+  --space-5:                 1.25rem;   /* 20px */
+  --space-6:                 1.5rem;    /* 24px */
+  --space-7:                 1.75rem;   /* 28px */
+  --space-8:                 2rem;      /* 32px */
+  --space-10:                2.5rem;    /* 40px */
+  --space-12:                3rem;      /* 48px */
+  --space-14:                3.5rem;    /* 56px */
+  --space-16:                4rem;      /* 64px */
+  --space-20:                5rem;      /* 80px */
+  --space-24:                6rem;      /* 96px */
+  --space-28:                7rem;      /* 112px */
+  --space-32:                8rem;      /* 128px */
+
+  /* Container */
+  --container-max:           1160px;
+  --container-padding:       32px;
+  --container-padding-sm:    20px;
+
+  /* ═══════════════════════════════════════════════════════
+     🔲 BORDES Y RADIOS
+     ═══════════════════════════════════════════════════════ */
+
+  --radius-sm:               6px;
+  --radius-md:               10px;
+  --radius-lg:               16px;
+  --radius-xl:               24px;
+  --radius-2xl:              32px;
+  --radius-full:             9999px;
+  --radius-pill:             100px;
+
+  /* ═══════════════════════════════════════════════════════
+     🌫️ SOMBRAS Y GLASSMORPHISM
+     ══════════════════════════════════════════════════════ */
+
+  /* Sombras clásicas */
+  --shadow-xs:               0 1px 3px rgba(13, 30, 28, 0.05);
+  --shadow-sm:               0 2px 12px rgba(13, 30, 28, 0.06);
+  --shadow-md:               0 8px 32px rgba(13, 30, 28, 0.10);
+  --shadow-lg:               0 24px 64px rgba(13, 30, 28, 0.13);
+  --shadow-xl:               0 40px 80px rgba(13, 30, 28, 0.18);
+
+  /* Sombras con color primario (para elementos destacados) */
+  --shadow-primary-sm:       0 4px 16px rgba(26, 122, 110, 0.20);
+  --shadow-primary-md:       0 8px 24px rgba(26, 122, 110, 0.25);
+  --shadow-primary-lg:       0 16px 48px rgba(26, 122, 110, 0.30);
+
+  /* Glassmorphism — Liquid Glass */
+  --glass-blur:              16px;
+  --glass-blur-strong:       24px;
+  --glass-blur-subtle:       8px;
+  --glass-opacity:           0.7;
+  --glass-opacity-strong:    0.85;
+  --glass-opacity-subtle:    0.5;
+  --glass-border:            rgba(255, 255, 255, 0.18);
+  --glass-border-strong:     rgba(255, 255, 255, 0.3);
+  --glass-shadow:            0 8px 32px rgba(13, 30, 28, 0.12);
+  --glass-shadow-strong:     0 16px 48px rgba(13, 30, 28, 0.18);
+
+  /* Reflejos / Highlights para liquid glass */
+  --glass-highlight:         rgba(255, 255, 255, 0.4);
+  --glass-highlight-strong:  rgba(255, 255, 255, 0.6);
+  --glass-highlight-subtle:  rgba(255, 255, 255, 0.2);
+
+  /* ═══════════════════════════════════════════════════════
+     ⚡ TRANSICIONES Y ANIMACIONES
+     ═══════════════════════════════════════════════════════ */
+
+  --ease-silk:               cubic-bezier(0.16, 1, 0.3, 1);      /* Suave y natural */
+  --ease-snappy:             cubic-bezier(0.2, 0, 0, 1);         /* Rápido y preciso */
+  --ease-bounce:             cubic-bezier(0.34, 1.56, 0.64, 1);  /* Rebote sutil */
+  --ease-out:                cubic-bezier(0, 0, 0.2, 1);
+  --ease-in-out:             cubic-bezier(0.4, 0, 0.2, 1);
+
+  --duration-fast:           120ms;
+  --duration-normal:         240ms;
+  --duration-slow:           400ms;
+  --duration-slower:         600ms;
+  --duration-silk:           800ms;       /* Para transiciones hero */
+
+  /* ═══════════════════════════════════════════════════════
+     📱 BREAKPOINTS RESPONSIVE
+     ═══════════════════════════════════════════════════════ */
+
+  --bp-xs:                   360px;      /* Móviles muy pequeños */
+  --bp-sm:                   480px;      /* Móviles */
+  --bp-md:                   640px;      /* Móviles grandes / tablets pequeños */
+  --bp-lg:                   768px;      /* Tablets */
+  --bp-xl:                   1024px;     /* Laptops */
+  --bp-2xl:                  1280px;     /* Desktop */
+  --bp-3xl:                  1536px;     /* Large desktop */
+
+  /* ═══════════════════════════════════════════════════════
+     🧭 Z-INDEX SCALE
+     ═══════════════════════════════════════════════════════ */
+
+  --z-base:                  1;
+  --z-dropdown:              100;
+  --z-sticky:                200;
+  --z-navbar:                  1000;       /* Navbar fixed top */
+  --z-modal:                 2000;
+  --z-popover:               3000;
+  --z-tooltip:               4000;
+  --z-toast:                 5000;
+
+  /* ═══════════════════════════════════════════════════════
+     🎯 OTROS
+     ═══════════════════════════════════════════════════════ */
+
+  --focus-ring:              0 0 0 3px var(--color-primary-ghost);
+  --focus-ring-strong:       0 0 0 3px var(--color-primary);
+  --scrollbar-width:         6px;
+  --scrollbar-track:         transparent;
+  --scrollbar-thumb:         rgba(13, 30, 28, 0.2);
+  --scrollbar-thumb-hover:   rgba(13, 30, 28, 0.35);
+}
+
+/* ═══════════════════════════════════════════════════════
+   🌙 MODO OSCURO (Opcional — se activa con data-theme="dark")
+   ═══════════════════════════════════════════════════════ */
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-bg:              #0A1614;
+    --color-bg-alt:          #0F1F1C;
+    --color-surface:         #12221F;
+    --color-surface-2:       #162A26;
+    --color-surface-glass:   rgba(18, 34, 31, 0.75);
+    --color-surface-glass-strong: rgba(18, 34, 31, 0.9);
+    --color-text-1:          #E8F4F2;
+    --color-text-2:          #A8C8C0;
+    --color-text-3:          #6B8C88;
+    --color-text-muted:      rgba(232, 244, 242, 0.45);
+    --color-border:          rgba(255, 255, 255, 0.08);
+    --color-border-strong:   rgba(255, 255, 255, 0.15);
+    --glass-border:          rgba(255, 255, 255, 0.12);
+    --glass-border-strong:   rgba(255, 255, 255, 0.2);
+    --glass-shadow:          0 8px 32px rgba(0, 0, 0, 0.35);
+    --glass-shadow-strong:   0 16px 48px rgba(0, 0, 0, 0.45);
+    --glass-highlight:       rgba(255, 255, 255, 0.08);
+    --glass-highlight-strong:rgba(255, 255, 255, 0.15);
+    --scrollbar-thumb:       rgba(255, 255, 255, 0.15);
+    --scrollbar-thumb-hover: rgba(255, 255, 255, 0.25);
+  }
+}
+
+/* Forzar modo claro si data-theme="light" */
+:root[data-theme="light"] {
+  --color-bg:                #E8F4F2;
+  --color-bg-alt:            #DFF0EE;
+  --color-surface:           #F4FAFA;
+  --color-surface-2:         #FFFFFF;
+  --color-surface-glass:     rgba(255, 255, 255, 0.7);
+  --color-surface-glass-strong: rgba(255, 255, 255, 0.85);
+  --color-text-1:            #0D1E1C;
+  --color-text-2:            #3A5C58;
+  --color-text-3:            #6B8C88;
+  --color-text-muted:        rgba(13, 30, 28, 0.45);
+  --color-border:            rgba(13, 30, 28, 0.08);
+  --color-border-strong:     rgba(13, 30, 28, 0.15);
+  --glass-border:            rgba(255, 255, 255, 0.18);
+  --glass-border-strong:     rgba(255, 255, 255, 0.3);
+  --glass-shadow:            0 8px 32px rgba(13, 30, 28, 0.12);
+  --glass-shadow-strong:     0 16px 48px rgba(13, 30, 28, 0.18);
+  --glass-highlight:         rgba(255, 255, 255, 0.4);
+  --glass-highlight-strong:  rgba(255, 255, 255, 0.6);
+  --scrollbar-thumb:         rgba(13, 30, 28, 0.2);
+  --scrollbar-thumb-hover:   rgba(13, 30, 28, 0.35);
+}
