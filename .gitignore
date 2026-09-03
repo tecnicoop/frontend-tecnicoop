@@ -3,6 +3,9 @@ node_modules/
 package-lock.json
 yarn.lock
 
+# Backend data
+backend/data/
+
 # Variables de entorno (NO subir credenciales a git)
 .env
 .env.local

@@ -5,8 +5,9 @@
   "type": "module",
   "main": "web/index.html",
   "scripts": {
-    "dev": "npx http-server web -p 8000 -c-1",
-    "start": "npx http-server web -p 3000"
+    "dev": "node backend/server.js",
+    "start": "node backend/server.js",
+    "frontend-only": "npx http-server web -p 8000 -c-1"
   },
   "keywords": [
     "tecnicoop",

@@ -162,6 +162,14 @@ Free for personal and commercial use
       display: flex; align-items: center; gap: 12px;
       flex-shrink: 0;
     }
+    .nav-user {
+      display: flex; align-items: center; gap: 12px;
+      flex-shrink: 0;
+    }
+    .nav-user-name {
+      font-size: 0.875rem; font-weight: 500; color: var(--text-1);
+      white-space: nowrap;
+    }
     .btn-ghost {
       font-size: 0.875rem; font-weight: 500; color: var(--text-2);
       padding: 9px 20px; border-radius: 100px;
@@ -1102,7 +1110,7 @@ Free for personal and commercial use
     @media (max-width: 768px) {
       .carousel-zoom { padding: 30px 0 0; }
       .container { padding: 0 20px; }
-      .nav-links, .nav-cta { display: none; }
+      .nav-links, .nav-cta, .nav-user { display: none; }
       .nav-hamburger { display: flex; }
       .testimonials-grid { grid-template-columns: 1fr; }
       /* Nav adjustments for tablets/smaller laptops */

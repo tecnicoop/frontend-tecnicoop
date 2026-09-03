@@ -35,9 +35,13 @@
           <li><a href="#testimonials">Experiencias</a></li>
           <li><a href="#faq">Preguntas frecuentes</a></li>
         </ul>
-        <div class="nav-cta">
+        <div class="nav-cta" id="navCta">
           <a href="login.html" class="btn-ghost">Ingresar</a>
           <a href="signup.html" class="btn-primary">Iniciar solicitud</a>
+        </div>
+        <div class="nav-cta nav-user" id="navUser" style="display:none">
+          <span class="nav-user-name" id="navUserName"></span>
+          <button class="btn-ghost" id="logoutBtn">Cerrar sesión</button>
         </div>
       </div>
       <button class="nav-hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false">
@@ -673,5 +677,49 @@
 
   <script src="templatemo-622-clearwave.js"></script>
   <script src="chatbot-widget.js" defer></script>
+
+  <!-- ── DETECCIÓN DE SESIÓN ── -->
+  <script>
+    (function(){
+      var navCta = document.getElementById('navCta');
+      var navUser = document.getElementById('navUser');
+      var navUserName = document.getElementById('navUserName');
+      var logoutBtn = document.getElementById('logoutBtn');
+      var mobileMenu = document.getElementById('mobileMenu');
+
+      function checkSession() {
+        var user = null;
+        try { user = JSON.parse(localStorage.getItem('user')); } catch(e) {}
+        if (user && user.email) {
+          navCta.style.display = 'none';
+          navUser.style.display = 'flex';
+          navUserName.textContent = user.nombre + ' ' + user.apellido;
+          // Actualizar menú móvil
+          if (mobileMenu) {
+            var ctaLink = mobileMenu.querySelector('.mobile-cta');
+            if (ctaLink) {
+              ctaLink.textContent = 'Cerrar sesión';
+              ctaLink.href = '#';
+              ctaLink.onclick = function(e) {
+                e.preventDefault();
+                localStorage.removeItem('user');
+                window.location.reload();
+              };
+            }
+          }
+        } else {
+          navCta.style.display = 'flex';
+          navUser.style.display = 'none';
+        }
+      }
+
+      logoutBtn.addEventListener('click', function() {
+        localStorage.removeItem('user');
+        window.location.reload();
+      });
+
+      checkSession();
+    })();
+  </script>
 </body>
 </html>

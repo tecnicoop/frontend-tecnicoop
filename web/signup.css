@@ -31,9 +31,10 @@ body{
   -moz-osx-font-smoothing:grayscale;
   min-height:100vh;
   display:flex;
-  align-items:center;
+  align-items:flex-start;
   justify-content:center;
-  padding:20px;
+  padding:40px 20px;
+  overflow-y:auto;
 }
 
 .signup-root{
@@ -47,22 +48,24 @@ body{
   background: var(--surface);
   border:1px solid var(--border);
   border-radius:var(--radius);
-  padding:28px 28px 20px;
+  padding:24px 24px 18px;
   box-shadow: var(--shadow-md);
 }
 
-.brand{display:flex;flex-direction:column;align-items:flex-start;gap:6px;margin-bottom:8px}
+.brand{display:flex;flex-direction:column;align-items:flex-start;gap:4px;margin-bottom:6px}
 .logo{font-family:'Playfair Display', Georgia, serif;color:var(--text-1);font-size:1.45rem;text-decoration:none;transition:color .18s ease}
 .logo:hover{color:var(--accent-mid)}
 .brand-sub{color:var(--text-2);font-size:.95rem;margin:0}
 
-.title{font-size:1.5rem;margin:12px 0 18px}
+.title{font-size:1.4rem;margin:10px 0 14px}
 
-.signup-form{display:flex;flex-direction:column;gap:12px}
-.signup-form label{font-size:.85rem;color:var(--text-2);margin-bottom:6px}
+.signup-form{display:flex;flex-direction:column;gap:10px}
+.signup-form label{font-size:.85rem;color:var(--text-2);margin-bottom:4px}
 .signup-form input[type="text"],
 .signup-form input[type="email"],
-.signup-form input[type="password"]{
+.signup-form input[type="password"],
+.signup-form select,
+.signup-form textarea{
   width:100%;
   padding:12px 14px;
   border-radius:10px;
@@ -70,11 +73,45 @@ body{
   background: var(--surface-2);
   color:var(--text-1);
   font-size:1rem;
+  font-family:inherit;
   outline:none;
   transition:box-shadow .18s ease, border-color .18s ease, transform .08s ease;
 }
 .signup-form input::placeholder{color:var(--text-3)}
-.signup-form input:focus{border-color:var(--accent);box-shadow:0 6px 20px rgba(26,122,110,0.08);transform:translateY(-1px)}
+.signup-form input:focus,
+.signup-form select:focus,
+.signup-form textarea:focus{border-color:var(--accent);box-shadow:0 6px 20px rgba(26,122,110,0.08);transform:translateY(-1px)}
+
+.signup-form select{
+  appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%233A5C58' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 14px center;
+  padding-right:36px;
+  cursor:pointer;
+}
+
+.signup-form textarea{
+  resize:vertical;
+  min-height:70px;
+}
+
+/* Nombre y apellido en fila */
+.form-name-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+.form-field{display:flex;flex-direction:column;gap:6px}
+.form-field label{margin-bottom:0}
+
+/* Hint del email */
+.field-hint{
+  font-size:.78rem;
+  color:var(--text-3);
+  margin-top:-6px;
+  padding-left:2px;
+}
 
 .form-row{display:flex;align-items:flex-start;gap:12px}
 .accept-terms{display:inline-flex;align-items:flex-start;gap:8px;color:var(--text-2);font-size:.92rem;cursor:pointer}
@@ -93,17 +130,17 @@ body{
   background: var(--accent);
   box-shadow: 0 6px 24px rgba(26,122,110,0.25);
   transition:transform .12s ease, box-shadow .12s ease, opacity .12s ease;
-  margin-top:8px;
+  margin-top:4px;
 }
 .btn-submit:hover{background:var(--accent-mid);box-shadow:0 8px 32px rgba(26,122,110,0.35)}
 .btn-submit:active{transform:translateY(1px)}
 .btn-submit:disabled{opacity:.6;cursor:not-allowed}
 
-.signup-footer{margin-top:14px;font-size:.95rem;color:var(--text-2);text-align:center}
+.signup-footer{margin-top:12px;font-size:.95rem;color:var(--text-2);text-align:center}
 .signup-footer a{color:var(--accent);text-decoration:underline;transition:color .18s ease}
 .signup-footer a:hover{color:var(--accent-mid)}
 
-.signup-footer-secondary{margin-top:10px;font-size:.92rem;color:var(--text-3);text-align:center}
+.signup-footer-secondary{margin-top:8px;font-size:.92rem;color:var(--text-3);text-align:center}
 .signup-footer-secondary a{color:var(--text-2);text-decoration:none;transition:color .18s ease}
 .signup-footer-secondary a:hover{color:var(--accent)}
 
@@ -190,26 +227,29 @@ body{
 @media (max-width:640px){
   body{padding:16px}
   .signup-root{max-width:100%}
-  .signup-card{padding:24px 20px 18px}
+  .signup-card{padding:20px 20px 16px}
   .logo{font-size:1.25rem}
-  .title{font-size:1.25rem;margin:10px 0 16px}
+  .title{font-size:1.2rem;margin:8px 0 12px}
 }
 
 @media (max-width:480px){
   body{padding:12px}
-  .signup-card{padding:20px 16px 16px}
+  .signup-card{padding:18px 16px 14px}
   .logo{font-size:1.1rem}
-  .title{font-size:1.1rem;margin:8px 0 14px}
+  .title{font-size:1.1rem;margin:6px 0 10px}
   .signup-form label{font-size:.8rem}
   .signup-form input[type="text"],
   .signup-form input[type="email"],
-  .signup-form input[type="password"]{padding:10px 12px;font-size:.95rem}
+  .signup-form input[type="password"],
+  .signup-form select,
+  .signup-form textarea{padding:10px 12px;font-size:.95rem}
   .validation-message{padding:12px 10px;font-size:.88rem}
+  .form-name-row{grid-template-columns:1fr;gap:8px}
 }
 
 @media (max-width:360px){
   body{padding:8px}
-  .signup-card{padding:16px 12px}
+  .signup-card{padding:14px 12px}
   .logo{font-size:1rem}
   .title{font-size:1rem}
   .validation-message{font-size:.85rem}
@@ -217,10 +257,10 @@ body{
 
 /* Responsive */
 @media (max-width:520px){
-  body{padding:18px}
-  .signup-card{padding:20px}
-  .logo{font-size:1.25rem}
-  .title{font-size:1.25rem}
+  body{padding:14px}
+  .signup-card{padding:18px}
+  .logo{font-size:1.2rem}
+  .title{font-size:1.2rem}
 }
 
 /* Subtle entrance */

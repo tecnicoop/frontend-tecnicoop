@@ -8,18 +8,22 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="login.css" />
+  <link rel="icon" type="image/x-icon" href="images/logo-innovatec-2.ico" />
 </head>
 <body>
   <main class="login-root">
     <section class="login-card" role="main" aria-labelledby="login-title">
       <div class="brand">
-        <img src="web\images\Logos InnovaTec Horizontal fondo claro.svg" class="logo">
+        <a href="index.html" class="logo"><img src="images/InnovaTec_logo_wtho_title.svg" alt="InnovaTec" style="height:48px;width:auto"></a>
         <p class="brand-sub">Cooperativa Escolar de Servicios Técnicos</p>
       </div>
 
       <h1 id="login-title" class="title">Ingresar</h1>
 
-      <form class="login-form" autocomplete="on" novalidate>
+      <!-- Mensaje de feedback -->
+      <div id="login-message" class="login-message" style="display: none;"></div>
+
+      <form class="login-form" autocomplete="on" novalidate id="login-form">
         <label for="email">Correo electrónico</label>
         <input id="email" name="email" type="email" inputmode="email" autocomplete="email" required placeholder="tu@alumno.etec.um.edu.ar" />
 
@@ -34,24 +38,74 @@
           <a href="#" class="forgot">Olvidé mi contraseña</a>
         </div>
 
-        <button type="submit" class="btn-submit">Ingresar</button>
+        <button type="submit" class="btn-submit" id="submit-btn">Ingresar</button>
       </form>
 
-      <div class="login-footer">¿No tienes cuenta? <a href="signup.html">Iniciar solicitud</a></div>
+      <div class="login-footer">¿No tenés cuenta? <a href="signup.html">Iniciar solicitud</a></div>
     </section>
   </main>
 
   <script>
     (function(){
-      const form = document.querySelector('.login-form');
-      form.addEventListener('submit', function(e){
+      const API_BASE = '';
+
+      const form = document.getElementById('login-form');
+      const emailInput = document.getElementById('email');
+      const passwordInput = document.getElementById('password');
+      const loginMessage = document.getElementById('login-message');
+      const submitBtn = document.getElementById('submit-btn');
+
+      function showMessage(text, type) {
+        loginMessage.style.display = 'block';
+        loginMessage.className = 'login-message ' + type;
+        loginMessage.textContent = text;
+      }
+
+      function hideMessage() {
+        loginMessage.style.display = 'none';
+      }
+
+      form.addEventListener('submit', async function(e) {
         e.preventDefault();
+        hideMessage();
+
         if (!form.checkValidity()) {
           form.reportValidity();
           return;
         }
-        // Placeholder: integrarlo con la lógica real de autenticación
-        alert('Envío simulado — integre su backend aquí.');
+
+        const email = emailInput.value.trim();
+        const password = passwordInput.value;
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Ingresando...';
+
+        try {
+          const response = await fetch(API_BASE + '/api/auth/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password })
+          });
+
+          const result = await response.json();
+
+          if (response.ok) {
+            showMessage('✓ Inicio de sesión exitoso. Bienvenido, ' + result.user.nombre + '.', 'success');
+            // Guardar datos del usuario en localStorage para persistencia
+            localStorage.setItem('user', JSON.stringify(result.user));
+            setTimeout(function() {
+              window.location.href = 'index.html';
+            }, 1500);
+          } else {
+            showMessage(result.error || 'Error al iniciar sesión.', 'error');
+          }
+        } catch (err) {
+          console.error('Error de conexión:', err);
+          showMessage('No se pudo conectar con el servidor. Verificá que el backend esté corriendo.', 'error');
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Ingresar';
+        }
       });
     })();
   </script>
