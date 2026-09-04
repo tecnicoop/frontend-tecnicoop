@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MarkETec · InnovaTec</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --accent: #243b68;
+      --accent-mid: #3d5594;
+      --accent-ghost: rgba(36, 59, 104, 0.08);
+      --surface: #f6f7f9;
+      --surface-2: #ffffff;
+      --border: #e4e7ec;
+      --text-1: #17202b;
+      --text-2: #4a5568;
+      --text-3: #8a94a6;
+      --radius: 16px;
+      --shadow-sm: 0 2px 12px rgba(13, 30, 28, 0.06);
+      --shadow-md: 0 10px 30px rgba(13, 30, 28, 0.12);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      background: var(--surface);
+      color: var(--text-1);
+      min-height: 100vh;
+    }
+
+    /* ── Navbar ── */
+    .navbar {
+      position: sticky; top: 0; z-index: 50;
+      display: flex; align-items: center; gap: 20px;
+      padding: 14px 28px;
+      background: var(--surface-2);
+      border-bottom: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+    }
+    .logo { font-size: 1.3rem; font-weight: 700; color: var(--text-1); text-decoration: none; }
+    .logo span { color: var(--accent); }
+    .nav-volver {
+      margin-left: auto;
+      font-size: 0.875rem; color: var(--text-2); text-decoration: none;
+      padding: 8px 14px; border-radius: 100px;
+      transition: color .2s, background .2s;
+    }
+    .nav-volver:hover { color: var(--accent); background: var(--accent-ghost); }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: inherit; font-size: 0.9rem; font-weight: 600;
+      padding: 10px 20px; border-radius: 100px; cursor: pointer;
+      border: none; text-decoration: none;
+      transition: background var(--silk, .3s), transform .2s, box-shadow .3s;
+    }
+    .btn-primary {
+      background: var(--accent); color: #fff;
+      box-shadow: 0 4px 16px rgba(36, 59, 104, 0.25);
+    }
+    .btn-primary:hover { background: var(--accent-mid); transform: translateY(-1px); }
+    .btn-ghost {
+      background: transparent; color: var(--text-2);
+      border: 1px solid var(--border);
+    }
+    .btn-ghost:hover { color: var(--accent); border-color: var(--accent); background: var(--accent-ghost); }
+    .btn-borrar {
+      margin-top: 14px; width: 100%; justify-content: center;
+      font-size: 0.8rem; padding: 8px 12px;
+      background: transparent; color: #c0392b;
+      border: 1px solid rgba(192, 57, 43, 0.3);
+    }
+    .btn-borrar:hover { background: rgba(192, 57, 43, 0.08); border-color: #c0392b; }
+    .btn-vender {
+      margin-top: 14px; width: 100%; justify-content: center;
+      font-size: 0.8rem; padding: 8px 12px;
+      background: transparent; color: #27ae60;
+      border: 1px solid rgba(39, 174, 96, 0.35);
+    }
+    .btn-vender:hover { background: rgba(39, 174, 96, 0.08); border-color: #27ae60; }
+
+    /* ── Barra de búsqueda / filtros ── */
+    .toolbar {
+      display: flex; gap: 14px; flex-wrap: wrap;
+      max-width: 1100px; margin: 8px auto 0; padding: 0 24px;
+    }
+    .toolbar input,
+    .toolbar select {
+      font-family: inherit; font-size: 0.9rem;
+      padding: 11px 16px;
+      border: 1px solid var(--border); border-radius: 12px;
+      background: var(--surface-2); color: var(--text-1);
+      outline: none; transition: border-color .2s;
+    }
+    .toolbar input { flex: 1; min-width: 200px; }
+    .toolbar input:focus,
+    .toolbar select:focus { border-color: var(--accent); }
+
+    /* ── Badge de estado ── */
+    .anuncio-img { position: relative; }
+    .estado-badge {
+      position: absolute; top: 12px; left: 12px;
+      font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+      padding: 4px 12px; border-radius: 100px;
+      background: #2ecc71; color: #fff;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+    .estado-badge.vendido { background: #8a94a6; }
+    .anuncio-card.vendido .anuncio-img { opacity: .55; filter: grayscale(.6); }
+
+    /* ── Modal de detalle ── */
+    .modal-detalle { max-width: 520px; position: relative; }
+    .modal-close {
+      position: absolute; top: 16px; right: 16px; z-index: 2;
+      width: 34px; height: 34px; border-radius: 50%;
+      border: 1px solid var(--border); background: var(--surface-2);
+      font-size: 1rem; cursor: pointer; color: var(--text-2);
+      transition: color .2s, border-color .2s;
+    }
+    .modal-close:hover { color: var(--accent); border-color: var(--accent); }
+    .detalle-img {
+      width: 100%; height: 260px; border-radius: 14px;
+      background-size: cover; background-position: center;
+      background-color: #eef1f6; margin-bottom: 16px;
+    }
+    .detalle-titulo { font-size: 1.4rem; margin: 10px 0 4px; }
+    .detalle-precio { font-size: 1.3rem; font-weight: 700; color: var(--accent); margin-bottom: 12px; }
+    .detalle-desc { color: var(--text-2); line-height: 1.6; margin-bottom: 16px; }
+    .detalle-vendedor {
+      border-top: 1px solid var(--border); padding-top: 14px; margin-bottom: 16px;
+    }
+    .detalle-vendedor p { margin: 4px 0; font-size: 0.9rem; color: var(--text-2); }
+    .detalle-vendedor a { color: var(--accent); text-decoration: none; }
+    .detalle-vendedor a:hover { text-decoration: underline; }
+    .detalle-btn { width: 100%; justify-content: center; text-align: center; }
+
+    .btn-editar {
+      margin-top: 14px; width: 100%; justify-content: center;
+      font-size: 0.8rem; padding: 8px 12px;
+      background: transparent; color: var(--accent);
+      border: 1px solid var(--accent-border, rgba(36, 59, 104, 0.3));
+    }
+    .btn-editar:hover { background: var(--accent-ghost); border-color: var(--accent); }
+
+    .foto-hint { display: block; font-size: 0.78rem; color: var(--text-3); margin-top: 5px; }
+
+    .detalle-num {
+      position: absolute; top: 12px; right: 12px;
+      font-size: 0.75rem; font-weight: 600;
+      padding: 4px 10px; border-radius: 100px;
+      background: rgba(23, 32, 43, 0.75); color: #fff;
+    }
+    .detalle-img { position: relative; }
+
+    .nav-saludo { font-size: 0.9rem; color: var(--text-2); }
+
+    /* ── Moderación (admin) ── */
+    .modal-moderar { max-width: 640px; }
+    .mod-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+    .mod-sub { color: var(--text-2); font-size: 0.85rem; margin-bottom: 16px; }
+    .mod-lista { display: flex; flex-direction: column; gap: 14px; max-height: 62vh; overflow-y: auto; padding-right: 4px; }
+    .mod-item {
+      display: flex; gap: 14px; align-items: flex-start;
+      background: #fafbfc; border: 1px solid var(--border); border-radius: 14px; padding: 12px;
+    }
+    .mod-img {
+      width: 64px; height: 64px; flex-shrink: 0; border-radius: 10px;
+      background-size: cover; background-position: center; background-color: #eef1f6;
+    }
+    .mod-info { flex: 1; min-width: 0; }
+    .mod-info h4 { font-size: 0.95rem; margin-bottom: 4px; }
+    .mod-info .mod-precio { font-weight: 700; color: var(--accent); font-size: 0.9rem; }
+    .mod-info .mod-meta { font-size: 0.78rem; color: var(--text-3); margin-top: 2px; }
+    .mod-badge {
+      display: inline-block; font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+      padding: 3px 10px; border-radius: 100px; margin-top: 6px;
+    }
+    .mod-badge.pendiente { background: #fef3c7; color: #92400e; }
+    .mod-badge.aprobado { background: #d1fae5; color: #065f46; }
+    .mod-badge.rechazado { background: #fee2e2; color: #991b1b; }
+    .mod-badge.vendido { background: #e2e8f0; color: #475569; }
+    .mod-acciones { display: flex; flex-direction: column; gap: 6px; flex-shrink: 0; }
+    .mod-acciones .btn {
+      font-size: 0.75rem; padding: 6px 12px; width: 100%; justify-content: center;
+    }
+    .btn-aprobar { color: #15803d; border-color: rgba(21, 128, 61, 0.35); }
+    .btn-aprobar:hover { background: rgba(21, 128, 61, 0.08); border-color: #15803d; }
+    .btn-rechazar { color: #b91c1c; border-color: rgba(185, 28, 28, 0.35); }
+    .btn-rechazar:hover { background: rgba(185, 28, 28, 0.08); border-color: #b91c1c; }
+
+    /* ── Toast ── */
+    .toast {
+      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+      background: #17202b; color: #fff; padding: 12px 20px; border-radius: 12px;
+      box-shadow: var(--shadow-md); z-index: 200; font-size: 0.9rem;
+      max-width: 90vw; text-align: center;
+    }
+
+    /* ── Header del mercado ── */
+    .market-header { text-align: center; padding: 48px 20px 16px; }
+    .market-header h1 { font-size: 2.2rem; font-weight: 700; }
+    .market-header h1 span { color: var(--accent); }
+    .market-header p { color: var(--text-2); margin-top: 6px; }
+
+    /* ── Grilla ── */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 24px;
+      max-width: 1100px;
+      margin: 32px auto 80px;
+      padding: 0 24px;
+    }
+    .anuncio-card {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: transform .3s, box-shadow .3s;
+      cursor: pointer;
+    }
+    .anuncio-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+    .anuncio-img {
+      height: 180px;
+      background-size: cover; background-position: center;
+      background-color: #eef1f6;
+    }
+    .anuncio-body { padding: 16px; }
+    .anuncio-cat {
+      font-size: 0.72rem; font-weight: 600; text-transform: uppercase;
+      color: var(--accent); background: var(--accent-ghost);
+      padding: 3px 10px; border-radius: 100px;
+    }
+    .anuncio-titulo { font-size: 1.05rem; margin: 10px 0 6px; }
+    .anuncio-precio { font-size: 1.15rem; font-weight: 700; color: var(--accent); }
+    .anuncio-vendedor { font-size: 0.8rem; color: var(--text-3); margin-top: 4px; }
+
+    .empty {
+      text-align: center; color: var(--text-3);
+      padding: 60px 20px; font-size: 1rem;
+    }
+
+    /* ── Modal ── */
+    .modal {
+      position: fixed; inset: 0; z-index: 100;
+      background: rgba(15, 23, 42, 0.5);
+      display: flex; align-items: center; justify-content: center;
+      padding: 20px;
+    }
+    /* El atributo hidden debe ocultar el modal (si no, display:flex lo pisa) */
+    .modal[hidden] { display: none; }
+    .modal-card {
+      background: var(--surface-2);
+      border-radius: 20px;
+      width: 100%; max-width: 460px;
+      padding: 28px;
+      box-shadow: var(--shadow-md);
+      max-height: 90vh; overflow-y: auto;
+    }
+    .modal-card h2 { margin-bottom: 18px; font-size: 1.4rem; }
+    .modal-card label { display: block; font-size: 0.85rem; color: var(--text-2); margin: 14px 0 6px; }
+    .modal-card input,
+    .modal-card textarea,
+    .modal-card select {
+      width: 100%; font-family: inherit; font-size: 0.95rem;
+      padding: 11px 14px;
+      border: 1px solid var(--border); border-radius: 12px;
+      background: #fafbfc; color: var(--text-1);
+      outline: none; transition: border-color .2s;
+    }
+    .modal-card input:focus,
+    .modal-card textarea:focus,
+    .modal-card select:focus { border-color: var(--accent); }
+    .modal-card textarea { resize: vertical; min-height: 90px; }
+    .modal-actions { display: flex; gap: 12px; margin-top: 22px; }
+    .modal-actions .btn { flex: 1; justify-content: center; }
+    .form-msg { font-size: 0.85rem; margin-top: 12px; }
+    .form-msg.error { color: #c0392b; }
+
+    @media (max-width: 640px) {
+      .navbar { flex-wrap: wrap; gap: 10px; }
+      .nav-volver { margin-left: 0; }
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Navbar ── -->
+  <nav class="navbar">
+    <a href="../index.html" class="logo">Innova<span>Tec</span></a>
+    <a href="../index.html" class="nav-volver">← Volver al inicio</a>
+    <button id="btnCrear" class="btn btn-primary">+ Crear anuncio</button>
+    <button id="btnModerar" class="btn btn-ghost" hidden>🛡️ Moderar</button>
+    <div id="sesionArea"></div>
+  </nav>
+
+  <!-- ── Header ── -->
+  <header class="market-header">
+    <h1>Mark<span>ETec</span></h1>
+    <p>El mercado de la cooperativa</p>
+  </header>
+
+  <!-- ── Barra de búsqueda y filtros ── -->
+  <div class="toolbar">
+    <input id="buscador" type="text" placeholder="🔍 Buscar por nombre..." />
+    <select id="filtroCategoria">
+      <option value="">Todas las categorías</option>
+      <option>Libros y apuntes</option>
+      <option>Tecnología</option>
+      <option>Papelería</option>
+      <option>Ropa y accesorios</option>
+      <option>Deportes</option>
+      <option>Otros</option>
+    </select>
+    <select id="orderPor" aria-label="Ordenar">
+      <option value="nuevos">Más nuevos</option>
+      <option value="menor">Precio: menor a mayor</option>
+      <option value="mayor">Precio: mayor a menor</option>
+    </select>
+  </div>
+
+  <!-- ── Grilla de anuncios ── -->
+  <main>
+    <section id="grilla" class="grid"></section>
+    <p id="sinAnuncios" class="empty" hidden>
+      Todavía no hay anuncios para mostrar.
+    </p>
+  </main>
+
+  <!-- ── Modal: crear anuncio ── -->
+  <div id="modalCrear" class="modal" hidden>
+    <div class="modal-card">
+      <h2 id="modalTitulo">Publicar un anuncio</h2>
+      <form id="formAnuncio">
+        <label for="titulo">Título del producto</label>
+        <input id="titulo" type="text" required placeholder="Ej: Apuntes de matemática" />
+
+        <label for="descripcion">Descripción</label>
+        <textarea id="descripcion" required placeholder="Contanos en qué estado está, etc."></textarea>
+
+        <label for="categoria">Categoría</label>
+        <select id="categoria" required>
+          <option value="">Seleccioná una categoría</option>
+          <option>Libros y apuntes</option>
+          <option>Tecnología</option>
+          <option>Papelería</option>
+          <option>Ropa y accesorios</option>
+          <option>Deportes</option>
+          <option>Otros</option>
+        </select>
+
+        <label for="precio">Precio ($)</label>
+        <input id="precio" type="number" min="0" step="0.01" required placeholder="Ej: 1500" />
+
+        <label for="foto">Fotos del producto</label>
+        <input id="foto" type="file" accept="image/*" multiple />
+        <small id="fotoHint" class="foto-hint">Podés subir hasta 5 imágenes.</small>
+
+        <div id="mensajeForm" class="form-msg"></div>
+
+        <div class="modal-actions">
+          <button type="button" id="btnCancelar" class="btn btn-ghost">Cancelar</button>
+          <button type="submit" id="btnSubmit" class="btn btn-primary">Publicar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ── Modal: detalle del producto ── -->
+  <div id="modalDetalle" class="modal" hidden>
+    <div class="modal-card modal-detalle">
+      <button type="button" id="btnCerrarDetalle" class="modal-close" aria-label="Cerrar">✕</button>
+      <div id="detalleImg" class="detalle-img"></div>
+      <span id="detalleCat" class="anuncio-cat"></span>
+      <h2 id="detalleTitulo" class="detalle-titulo"></h2>
+      <p id="detallePrecio" class="detalle-precio"></p>
+      <p id="detalleDesc" class="detalle-desc"></p>
+      <div class="detalle-vendedor">
+        <p><strong>Vendedor:</strong> <span id="detalleVendedor"></span></p>
+        <p><strong>Contacto:</strong> <a id="detalleEmail" href="#"></a></p>
+      </div>
+      <a id="detalleContactar" class="btn btn-primary detalle-btn" href="#" target="_blank">💬 Contactar al vendedor</a>
+    </div>
+  </div>
+
+  <!-- ── Modal: moderación (solo admin) ── -->
+  <div id="modalModerar" class="modal" hidden>
+    <div class="modal-card modal-moderar">
+      <div class="mod-head">
+        <h2>Publicaciones por moderar</h2>
+        <button type="button" id="btnCerrarModerar" class="modal-close" aria-label="Cerrar">✕</button>
+      </div>
+      <p class="mod-sub">Aprobá o rechazá las publicaciones. Las que no estén aprobadas no se ven en el mercado.</p>
+      <div id="modLista" class="mod-lista"></div>
+    </div>
+  </div>
+
+  <!-- ── Toast de notificación ── -->
+  <div id="toast" class="toast" hidden></div>
+
+  <script type="module" src="js/firebase-config.js"></script>
+  <script type="module" src="js/market.js"></script>
+</body>
+</html>

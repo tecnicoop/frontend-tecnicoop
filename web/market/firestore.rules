@@ -1,0 +1,22 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Colección de anuncios del MarkETec
+    match /anuncios/{id} {
+      // Cualquiera puede LEER los anuncios (ver el mercado)
+      allow read: if true;
+
+      // Cualquiera puede CREAR anuncios.
+      // La validación de "tener sesión" la hace el frontend con
+      // localStorage (Firebase no puede verificar eso sin Auth).
+      allow create: if true;
+
+      // Cualquiera puede BORRAR y ACTUALIZAR anuncios.
+      // La validación de "solo el dueño" la hace el frontend (solo muestra
+      // los botones en los anuncios propios). El update se usa para
+      // marcar un anuncio como "vendido".
+      allow delete: if true;
+      allow update: if true;
+    }
+  }
+}

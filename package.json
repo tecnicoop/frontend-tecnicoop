@@ -17,9 +17,11 @@
   "author": "Tecnicoop",
   "license": "MIT",
   "dependencies": {
-    "@google/generative-ai": "^0.11.0"
+    "@google/generative-ai": "^0.11.0",
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.6",
+    "express": "^5.2.1"
   },
-  "devDependencies": {},
   "engines": {
     "node": ">=18.0.0"
   }
