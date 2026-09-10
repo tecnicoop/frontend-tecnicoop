@@ -266,3 +266,95 @@ body{
 /* Subtle entrance */
 .signup-card{transform:translateY(6px);opacity:0;animation:enter .42s ease .06s forwards}
 @keyframes enter{to{transform:none;opacity:1}}
+
+/* ════════════════════════════════════════════════════════════════════════
+   PASO 2 — Verificación de código
+   ════════════════════════════════════════════════════════════════════════ */
+
+.verify-card{text-align:center}
+
+.verify-icon{
+  font-size:2.8rem;
+  margin:8px 0 4px;
+  line-height:1;
+}
+
+.verify-title{
+  font-size:1.35rem;
+  margin:6px 0 8px;
+}
+
+.verify-sub{
+  font-size:.95rem;
+  color:var(--text-2);
+  margin:0 0 20px;
+  line-height:1.5;
+}
+.verify-sub strong{
+  color:var(--text-1);
+  word-break:break-all;
+}
+
+.verify-form{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  text-align:left;
+}
+
+.verify-label{
+  font-size:.85rem;
+  color:var(--text-2);
+  margin-bottom:2px;
+  text-align:left;
+}
+
+.verify-input{
+  width:100%;
+  padding:16px 14px;
+  border-radius:10px;
+  border:1px solid var(--border);
+  background:var(--surface-2);
+  color:var(--text-1);
+  font-size:1.6rem;
+  font-family:'Courier New', monospace;
+  letter-spacing:8px;
+  text-align:center;
+  outline:none;
+  transition:box-shadow .18s ease, border-color .18s ease, transform .08s ease;
+}
+.verify-input::placeholder{
+  color:var(--text-3);
+  letter-spacing:12px;
+  font-size:1.4rem;
+}
+.verify-input:focus{
+  border-color:var(--accent);
+  box-shadow:0 6px 20px rgba(26,122,110,0.08);
+  transform:translateY(-1px);
+}
+
+.verify-resend{
+  margin-top:16px;
+  font-size:.9rem;
+  color:var(--text-3);
+  text-align:center;
+}
+.resend-link{
+  background:none;
+  border:0;
+  color:var(--accent);
+  font-size:.9rem;
+  cursor:pointer;
+  text-decoration:underline;
+  font-family:inherit;
+  padding:0;
+  transition:color .18s ease;
+}
+.resend-link:hover{color:var(--accent-mid)}
+.resend-link:disabled{
+  color:var(--text-3);
+  cursor:not-allowed;
+  text-decoration:none;
+}
+.resend-link:disabled:hover{color:var(--text-3)}

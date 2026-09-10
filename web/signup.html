@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Iniciar solicitud — ETec Ltda.</title>
+  <title>Registrarse — ETec Ltda.</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet" />
@@ -15,10 +15,10 @@
     <section class="signup-card" role="main" aria-labelledby="signup-title">
       <div class="brand">
         <a href="index.html" class="logo"><img src="images/InnovaTec_logo_wtho_title.svg" alt="InnovaTec" style="height:48px;width:auto"></a>
-        <p class="brand-sub">Solicitud de membresía cooperativa</p>
+        <p class="brand-sub">Cooperativa Escolar de Servicios Técnicos</p>
       </div>
 
-      <h1 id="signup-title" class="title">Iniciar solicitud de membresía</h1>
+      <h1 id="signup-title" class="title">Registrarse</h1>
 
       <!-- Mensaje de validación -->
       <div id="validation-message" class="validation-message" style="display: none;"></div>
@@ -93,10 +93,49 @@
           <option value="no-alumno">No soy alumno</option>
         </select>
 
-        <button type="submit" class="btn-submit" id="submit-btn">Enviar solicitud</button>
+        <button type="submit" class="btn-submit" id="submit-btn">Registrarse</button>
       </form>
 
       <div class="signup-footer">¿Ya tenés cuenta? <a href="login.html">Iniciá sesión</a></div>
+      <div class="signup-footer-secondary"><a href="index.html">← Volver a inicio</a></div>
+    </section>
+
+    <!-- ── PASO 2: Verificación de código ── -->
+    <section class="signup-card verify-card" id="verify-step" style="display:none;" role="main">
+      <div class="brand">
+        <a href="index.html" class="logo"><img src="images/InnovaTec_logo_wtho_title.svg" alt="InnovaTec" style="height:48px;width:auto"></a>
+        <p class="brand-sub">Cooperativa Escolar de Servicios Técnicos</p>
+      </div>
+
+      <div class="verify-icon">✉️</div>
+      <h1 class="title verify-title">Verificá tu email</h1>
+      <p class="verify-sub">Te enviamos un código de 6 dígitos a<br><strong id="verify-email-display"></strong></p>
+
+      <!-- Mensaje de feedback -->
+      <div id="verify-message" class="validation-message" style="display: none;"></div>
+
+      <form class="verify-form" id="verify-form" novalidate>
+        <label for="verify-code" class="verify-label">Código de verificación</label>
+        <input
+          id="verify-code"
+          name="code"
+          type="text"
+          inputmode="numeric"
+          pattern="[0-9]{6}"
+          maxlength="6"
+          autocomplete="one-time-code"
+          required
+          placeholder="• • • • • •"
+          class="verify-input"
+        />
+
+        <button type="submit" class="btn-submit" id="verify-btn">Verificar código</button>
+      </form>
+
+      <div class="verify-resend">
+        ¿No llegó el código?
+        <button type="button" id="resend-btn" class="resend-link" disabled>Reenviar código <span id="resend-timer"></span></button>
+      </div>
       <div class="signup-footer-secondary"><a href="index.html">← Volver a inicio</a></div>
     </section>
   </main>
@@ -105,6 +144,7 @@
     (function(){
       const API_BASE = '';
 
+      // ── Elementos del Paso 1 (Formulario) ──
       const form = document.getElementById('signup-form');
       const nombreInput = document.getElementById('nombre');
       const apellidoInput = document.getElementById('apellido');
@@ -113,6 +153,20 @@
       const rolSelect = document.getElementById('rol');
       const validationMessage = document.getElementById('validation-message');
       const submitBtn = document.getElementById('submit-btn');
+
+      // ── Elementos del Paso 2 (Verificación) ──
+      const verifyStep = document.getElementById('verify-step');
+      const verifyForm = document.getElementById('verify-form');
+      const verifyCodeInput = document.getElementById('verify-code');
+      const verifyBtn = document.getElementById('verify-btn');
+      const verifyMessage = document.getElementById('verify-message');
+      const verifyEmailDisplay = document.getElementById('verify-email-display');
+      const resendBtn = document.getElementById('resend-btn');
+      const resendTimer = document.getElementById('resend-timer');
+
+      // ── Datos guardados del paso 1 ──
+      let pendingData = null;
+      let resendCooldown = null;
 
       /**
        * Dominios de email permitidos
@@ -125,7 +179,7 @@
       }
 
       /**
-       * Mostrar mensaje de feedback
+       * Mostrar mensaje de feedback (paso 1)
        */
       function showMessage(text, type) {
         validationMessage.style.display = 'block';
@@ -135,6 +189,19 @@
 
       function hideMessage() {
         validationMessage.style.display = 'none';
+      }
+
+      /**
+       * Mostrar mensaje de feedback (paso 2)
+       */
+      function showVerifyMessage(text, type) {
+        verifyMessage.style.display = 'block';
+        verifyMessage.className = 'validation-message ' + type;
+        verifyMessage.innerHTML = '<strong>' + text + '</strong>';
+      }
+
+      function hideVerifyMessage() {
+        verifyMessage.style.display = 'none';
       }
 
       /**
@@ -152,13 +219,19 @@
       });
 
       /**
-       * Enviar formulario al backend
+       * Solo permitir números en el input de código
+       */
+      verifyCodeInput.addEventListener('input', function() {
+        this.value = this.value.replace(/[^0-9]/g, '');
+      });
+
+      /**
+       * ── PASO 1: Enviar formulario → solicitar código ──
        */
       form.addEventListener('submit', async function(e) {
         e.preventDefault();
         hideMessage();
 
-        // Validación HTML5
         if (!form.checkValidity()) {
           form.reportValidity();
           return;
@@ -166,20 +239,18 @@
 
         const email = emailInput.value.trim();
 
-        // Validar dominio del email
         if (!isValidInstitutionalEmail(email)) {
           showMessage('El email debe ser @etec.um.edu.ar o @alumno.etec.um.edu.ar', 'error');
           return;
         }
 
-        // Validar contraseña
         if (passwordInput.value.length < 6) {
           showMessage('La contraseña debe tener al menos 6 caracteres.', 'error');
           return;
         }
 
-        // Preparar datos
-        const data = {
+        // Guardar datos para el paso 2
+        pendingData = {
           nombre: nombreInput.value.trim(),
           apellido: apellidoInput.value.trim(),
           email: email,
@@ -187,38 +258,147 @@
           rol: rolSelect.value
         };
 
-        // Enviar al backend
+        // Enviar al backend para que genere y envíe el código
         submitBtn.disabled = true;
-        submitBtn.textContent = 'Enviando solicitud...';
+        submitBtn.textContent = 'Enviando código...';
 
         try {
-          const response = await fetch(API_BASE + '/api/auth/register', {
+          const response = await fetch(API_BASE + '/api/auth/send-code', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
+            body: JSON.stringify(pendingData)
           });
 
           const result = await response.json();
 
           if (response.ok) {
-            showMessage('✓ Solicitud enviada exitosamente. ' + result.message, 'success');
-            // Guardar sesión automáticamente después del registro
-            localStorage.setItem('user', JSON.stringify(result.user));
-            form.reset();
-            setTimeout(function() {
-              window.location.href = 'index.html';
-            }, 2000);
+            // Avanzar al paso 2
+            showVerifyStep(email);
           } else {
-            showMessage(result.error || 'Error al enviar la solicitud.', 'error');
+            showMessage(result.error || 'Error al enviar el código.', 'error');
           }
         } catch (err) {
           console.error('Error de conexión:', err);
           showMessage('No se pudo conectar con el servidor. Verificá que el backend esté corriendo.', 'error');
         } finally {
           submitBtn.disabled = false;
-          submitBtn.textContent = 'Enviar solicitud';
+          submitBtn.textContent = 'Registrarse';
         }
       });
+
+      /**
+       * ── PASO 2: Mostrar pantalla de verificación ──
+       */
+      function showVerifyStep(email) {
+        // Ocultar paso 1, mostrar paso 2
+        form.style.display = 'none';
+        validationMessage.style.display = 'none';
+        document.querySelector('.signup-footer').style.display = 'none';
+        verifyStep.style.display = 'block';
+        verifyEmailDisplay.textContent = email;
+
+        // Focus al input de código
+        setTimeout(function() { verifyCodeInput.focus(); }, 200);
+
+        // Iniciar cooldown de reenvío
+        startResendCooldown();
+      }
+
+      /**
+       * ── PASO 2: Verificar código ──
+       */
+      verifyForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        hideVerifyMessage();
+
+        const code = verifyCodeInput.value.trim();
+
+        if (code.length !== 6) {
+          showVerifyMessage('El código debe tener 6 dígitos.', 'error');
+          return;
+        }
+
+        verifyBtn.disabled = true;
+        verifyBtn.textContent = 'Verificando...';
+
+        try {
+          const response = await fetch(API_BASE + '/api/auth/verify-code', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: pendingData.email, code: code })
+          });
+
+          const result = await response.json();
+
+          if (response.ok) {
+            showVerifyMessage('✓ ' + result.message, 'success');
+            // Guardar sesión
+            localStorage.setItem('user', JSON.stringify(result.user));
+            setTimeout(function() {
+              window.location.href = 'index.html';
+            }, 1500);
+          } else {
+            showVerifyMessage(result.error || 'Código incorrecto.', 'error');
+            verifyCodeInput.value = '';
+            verifyCodeInput.focus();
+          }
+        } catch (err) {
+          console.error('Error de conexión:', err);
+          showVerifyMessage('No se pudo conectar con el servidor.', 'error');
+        } finally {
+          verifyBtn.disabled = false;
+          verifyBtn.textContent = 'Verificar código';
+        }
+      });
+
+      /**
+       * ── Reenviar código con cooldown de 60s ──
+       */
+      function startResendCooldown() {
+        var seconds = 60;
+        resendBtn.disabled = true;
+        resendTimer.textContent = '(' + seconds + 's)';
+
+        resendCooldown = setInterval(function() {
+          seconds--;
+          if (seconds <= 0) {
+            clearInterval(resendCooldown);
+            resendBtn.disabled = false;
+            resendTimer.textContent = '';
+          } else {
+            resendTimer.textContent = '(' + seconds + 's)';
+          }
+        }, 1000);
+      }
+
+      resendBtn.addEventListener('click', async function() {
+        if (!pendingData) return;
+
+        resendBtn.disabled = true;
+        resendBtn.textContent = 'Enviando...';
+
+        try {
+          const response = await fetch(API_BASE + '/api/auth/send-code', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(pendingData)
+          });
+
+          const result = await response.json();
+
+          if (response.ok) {
+            showVerifyMessage('Código reenviado a ' + pendingData.email, 'success');
+          } else {
+            showVerifyMessage(result.error || 'Error al reenviar.', 'error');
+          }
+        } catch (err) {
+          showVerifyMessage('Error de conexión.', 'error');
+        } finally {
+          resendBtn.innerHTML = 'Reenviar código <span id="resend-timer"></span>';
+          startResendCooldown();
+        }
+      });
+
     })();
   </script>
 </body>
