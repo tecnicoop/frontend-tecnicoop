@@ -1,3 +1,6 @@
 [submodule "web/Impresion3D-Cooperativa"]
 	path = web/Impresion3D-Cooperativa
 	url = git@github.com:NazarenoMoreno1/Impresion3D-Cooperativa.git
+[submodule "web/capacitaciones"]
+	path = web/capacitaciones
+	url = git@github.com:LautiiGomez/capacitaciones.git
