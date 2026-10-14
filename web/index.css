@@ -948,6 +948,7 @@ Free for personal and commercial use
       display: inline-flex; align-items: center; gap: 8px;
       font-size: 0.9375rem; font-weight: 600; color: #fff;
       background: var(--accent); padding: 12px 28px; border-radius: 100px;
+      margin-top: auto;
       box-shadow: 0 4px 16px rgba(26,122,110,0.25);
       transition: background var(--silk-dur) var(--silk), transform var(--silk-dur) var(--silk), box-shadow var(--silk-dur) var(--silk);
     }
@@ -1137,6 +1138,30 @@ Free for personal and commercial use
     .footer-legal { display: flex; gap: 24px; }
     .footer-legal a { font-size: 0.8125rem; color: rgba(255,255,255,0.3); transition: color 0.3s; }
     .footer-legal a:hover { color: rgba(255,255,255,0.6); }
+
+    /* Footer — Diseñado por */
+    .footer-designed {
+      display: flex; align-items: center; gap: 16px;
+      padding: 28px 0;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      margin-bottom: 8px;
+    }
+    .footer-designed-label {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: rgba(255,255,255,0.25);
+      white-space: nowrap;
+    }
+    .footer-designed-logo {
+      display: flex; align-items: center;
+    }
+    .footer-designed-logo img {
+      height: 44px; width: auto;
+      filter: brightness(0) invert(1) opacity(0.45);
+      transition: filter 0.3s var(--silk);
+    }
+    .footer-designed-logo:hover img {
+      filter: brightness(0) invert(1) opacity(0.8);
+    }
 
     /* ══════════════════════════════════════════
        RESPONSIVE
